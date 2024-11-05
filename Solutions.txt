@@ -40,6 +40,101 @@ public class Solution {
     }
 }
 
+#3.
+public class Solution {
+    
+    static int nextPrime(ArrayList<Integer> primes){
+        
+        int newp = primes.get(primes.size()-1)+2;
+        int q=1;
+        while (true) {
+            for (int p:primes){
+                q = p;
+                if (newp % p == 0 || p*p > newp){
+                    break;
+                }
+            }
+            if (q*q > newp){
+                return newp;
+            }
+            newp += 2;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        long n = in.nextLong();
+        int lastIndex;
+        ArrayList<Integer> plist = new ArrayList<Integer>();
+        plist.add(2);
+        plist.add(3);
+        while (plist.size() <= Math.sqrt(n)){
+            plist.add(nextPrime(plist));
+        }
+        lastIndex = plist.size() - 1;//Now, check for divisibility.
+        while (n % plist.get(lastIndex) !=0){
+            lastIndex -= 1;
+            if (lastIndex == -1){
+                break;
+            }
+        }
+        if (lastIndex == -1){
+            System.out.println(n);
+        }
+        else{
+            System.out.println(plist.get(lastIndex));
+        }
+    }
+}
+
+#4.
+public class Solution {
+    
+    static boolean isPallindromic(int n){
+        
+        int numDigits;
+        if (n > 99999){
+            numDigits = 6;
+        }
+        else {
+            numDigits = 5;
+        }
+        int[] digits = new int[numDigits];
+
+        for (int i=0;i<numDigits;i++){
+            digits[i] = n%10;
+            n = (n-digits[i])/10;
+        }
+
+        for (int i=0;i<numDigits;i++){
+            if (digits[i]!=digits[numDigits-i-1]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int product;
+        int largestProduct = 1;
+        int n = in.nextInt();
+        for (int i=999;i>=100;i--){
+            for (int j=999;j>=100;j--){
+                product = i*j;
+                if (isPallindromic(product) && product < n){
+                    if (product > largestProduct){
+                        largestProduct = product;
+                    }
+                }
+            }
+        }
+        System.out.println(largestProduct);
+    }
+}
+
+
 #5.
 public class Solution {
     
@@ -79,6 +174,43 @@ public class Solution {
     }
 }
 
+#7.
+public class Solution {
+    
+    static int nextPrime(ArrayList<Integer> primes){
+        
+        int newp = primes.get(primes.size()-1)+2;
+        int q=1;
+        while (true) {
+            for (int p:primes){
+                q = p;
+                if (newp % p == 0 || p*p > newp){
+                    break;
+                }
+            }
+            if (q*q > newp){
+                return newp;
+            }
+            newp += 2;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        if (n==1){
+            System.out.println(2);
+        }
+        ArrayList<Integer> primes = new ArrayList<Integer>();
+        primes.add(2);
+        primes.add(3);
+        while (primes.size() < n){
+            primes.add(nextPrime(primes));
+        }
+        System.out.println(primes.get(primes.size()-1));
+    }
+}
+
 #8.
 public class Solution {
 
@@ -105,5 +237,62 @@ public class Solution {
             start += 1;
         }
         System.out.println(largestProduct);
+    }
+}
+
+#12.
+public class Solution {
+    
+    static int numDivisors(int n){
+        
+        if (n==1){
+            return 1;
+        }
+        int result = 2;
+        int icopy = 1;
+        for (int i=2;i*i<n;i++){
+            icopy = i;
+            if (n%i == 0){
+                result += 2;
+            }
+        }
+        if (icopy*icopy == n){
+            result += 1;
+        }
+        
+        return result;
+    }
+
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int triang_number = 1;
+        int counter = 1;
+        while (numDivisors(triang_number)<=n){
+            counter += 1;
+            triang_number += counter;
+        }
+        System.out.println(triang_number);
+    }
+}
+
+#9.
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int a;
+        int result = -1;
+        for (int c=1;c<n;c++){
+            for (int b=0;b<n-c;b++){
+                a = n - b - c;
+                if (a < b && a*a+b*b==c*c){
+                    result = Math.max(result, a*b*c);
+                }
+            }
+        }
+        System.out.println(result);
     }
 }
