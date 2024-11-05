@@ -3,21 +3,18 @@ public class Solution {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int t = in.nextInt();
-        long result,m1,m2,m3;
-        for(int a0 = 0; a0 < t; a0++){
-            int n = in.nextInt();
-            m1 = n/3;
-            m2 = n/5;
-            m3 = n/15;
-            
-            result = (3*m1*(m1+1)+5*m2*(m2+1)-15*m3*(m3+1))/2;
-            
-            if (n%3==0 || n%5==0){
-                result -= n;
-            }
-            System.out.println(result);
+
+        int n = in.nextInt();
+        m1 = n/3;
+        m2 = n/5;
+        m3 = n/15;
+        
+        result = (3*m1*(m1+1)+5*m2*(m2+1)-15*m3*(m3+1))/2;
+        
+        if (n%3==0 || n%5==0){
+            result -= n;
         }
+        System.out.println(result);
     }
 }
 
@@ -26,22 +23,20 @@ public class Solution {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int t = in.nextInt();
-        for(int a0 = 0; a0 < t; a0++){
-            long n = in.nextLong();
-            long mprev = 1,mcurr = 2;
-            long result = 0,temp;
         
-            while (mcurr <= n){
-                if (mcurr % 2 == 0){
-                    result += mcurr;
-                }
-                temp = mcurr;
-                mcurr = mcurr + mprev;
-                mprev = temp;
+        long n = in.nextLong();
+        long mprev = 1,mcurr = 2;
+        long result = 0,temp;
+    
+        while (mcurr <= n){
+            if (mcurr % 2 == 0){
+                result += mcurr;
             }
-            System.out.println(result);
+            temp = mcurr;
+            mcurr = mcurr + mprev;
+            mprev = temp;
         }
+        System.out.println(result);
     }
 }
 
@@ -57,17 +52,15 @@ public class Solution {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int t = in.nextInt();
-        for(int a0 = 0; a0 < t; a0++){
-            int n = in.nextInt();
-            int result = 1;
-            for (int i = 1;i<=n;i++){
-                if (result%i != 0){
-                    result *= i/gcd(result, i);
-                }
+        
+        int n = in.nextInt();
+        int result = 1;
+        for (int i = 1;i<=n;i++){
+            if (result%i != 0){
+                result *= i/gcd(result, i);
             }
-            System.out.println(result);
         }
+        System.out.println(result);
     }
 }
 
@@ -76,14 +69,13 @@ public class Solution {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int t = in.nextInt();
+
         long result;
-        for(int a0 = 0; a0 < t; a0++){
-            long n = in.nextInt();
-            
-            result = (n-1)*n*(n+1)*(3*n+2)/12;
-            System.out.println(Math.abs(result));
-        }
+        
+        long n = in.nextInt();
+        
+        result = (n-1)*n*(n+1)*(3*n+2)/12;
+        System.out.println(Math.abs(result));
     }
 }
 
@@ -92,28 +84,26 @@ public class Solution {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int t = in.nextInt();
-        for(int a0 = 0; a0 < t; a0++){
-            int n = in.nextInt();
-            int k = in.nextInt();
-            String num = in.next();
-            // Create an array of the digits of num.
-            int[] numArr = new int[n];
-            for (int i=0;i<num.length();i++){
-                numArr[i] = Integer.parseInt(num.substring(i,i+1));
-            }
-            int largestProduct = 0;
-            int start = 0;
-            int currProduct;
-            while (start < n-k){
-                currProduct = 1;
-                for (int j=0;j<k;j++){
-                    currProduct *= numArr[start+j];
-                }
-                largestProduct = Math.max(largestProduct,currProduct);
-                start += 1;
-            }
-            System.out.println(largestProduct);
+        
+        int n = in.nextInt();
+        int k = in.nextInt();
+        String num = in.next();
+        // Create an array of the digits of num.
+        int[] numArr = new int[n];
+        for (int i=0;i<num.length();i++){
+            numArr[i] = Integer.parseInt(num.substring(i,i+1));
         }
+        int largestProduct = 0;
+        int start = 0;
+        int currProduct;
+        while (start < n-k){
+            currProduct = 1;
+            for (int j=0;j<k;j++){
+                currProduct *= numArr[start+j];
+            }
+            largestProduct = Math.max(largestProduct,currProduct);
+            start += 1;
+        }
+        System.out.println(largestProduct);
     }
 }
